@@ -12,6 +12,8 @@
     "class-methods-use-this": "off",
     "no-plusplus": "off",
     "no-else-return": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-undef": "off",
+    "no-use-before-define": "off"
   }
 }

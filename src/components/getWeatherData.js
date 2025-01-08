@@ -29,6 +29,6 @@ export default async function getWeatherData(city, temperatureScale) {
     }
   } catch (error) {
     console.error('Fetch', error);
-    return error;
+    return error.message;
   }
 }
