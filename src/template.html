@@ -5,5 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div class="root">
+      <div class="header">
+        <h1 class="app-header">WeatherApp</h1>
+        <div class="search-box-wrapper">
+          <span class="search-box">
+            <input
+              type="search"
+              id="city-search"
+              name="q"
+              placeholder="Search city"
+            />
+            <span class="svg-container"
+              ><svg
+                width="64px"
+                height="64px"
+                viewBox="0 0 24 24"
+                id="Layer_1"
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: none;
+                        stroke: #020202;
+                        stroke-miterlimit: 10;
+                        stroke-width: 1.91px;
+                      }
+                    </style>
+                  </defs>
+                  <circle class="cls-1" cx="9.14" cy="9.14" r="7.64"></circle>
+                  <line
+                    class="cls-1"
+                    x1="22.5"
+                    y1="22.5"
+                    x2="14.39"
+                    y2="14.39"
+                  ></line>
+                </g>
+              </svg>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="main">
+        <!-- Grid structure for weather display.  -->
+        <div class="grid location"></div>
+        <div class="grid conditions"></div>
+        <div class="grid currentTemp"></div>
+        <div class="grid feelsLike"></div>
+        <div class="grid windSpeed"></div>
+        <div class="grid humidity"></div>
+      </div>
+    </div>
+  </body>
 </html>
