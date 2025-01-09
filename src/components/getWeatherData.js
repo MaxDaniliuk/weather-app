@@ -16,7 +16,7 @@ export default async function getWeatherData(city, temperatureScale) {
         currentTemp: weatherData.days[0].temp,
         feelsLike: weatherData.days[0].feelslike,
         windSpeed: weatherData.days[0].windspeed,
-        humidity: `${weatherData.days[0].humidity}%`,
+        humidity: weatherData.days[0].humidity,
       };
       console.log(weatherDetails);
       return weatherDetails;

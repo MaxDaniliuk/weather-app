@@ -1,24 +1,26 @@
 import getWeatherData from './getWeatherData';
 
-// getWeatherData('Vilnius', 'us');
-
-// renderEvents function that contains event listeners
-
 export default function displayResponse() {
-  // const cachedElements = cacheElements();
   cacheElements().searchBtn().addEventListener('click', processResponse);
   cacheElements()
     .mySearch()
     .addEventListener('keypress', e => {
       if (e.key === 'Enter') processResponse();
     });
+  cacheElements()
+    .getCelsius()
+    .addEventListener('click', e => selectTemperatureScale(e));
+  cacheElements()
+    .getFahrenheit()
+    .addEventListener('click', e => selectTemperatureScale(e));
 }
 
 async function processResponse() {
   const cachedElements = cacheElements();
   const inputEntered = cachedElements.mySearch().value;
   if (inputEntered.trim() !== '') {
-    const response = await getWeatherData(inputEntered, 'metric');
+    const { tempScale, degree, rate } = getTemperatureScale();
+    const response = await getWeatherData(inputEntered, tempScale); // second param
     if (typeof response === 'string' || response instanceof String) {
       cachedElements.conditionsDisplay().textContent = response;
     } else {
@@ -32,10 +34,10 @@ async function processResponse() {
       } = response;
       cachedElements.locationDisplay().textContent = location;
       cachedElements.conditionsDisplay().textContent = conditions;
-      cachedElements.currentTempDisplay().textContent = currentTemp;
-      cachedElements.feelsLikeDisplay().textContent = feelsLike;
-      cachedElements.windSpeedDisplay().textContent = windSpeed;
-      cachedElements.humidityDisplay().textContent = humidity;
+      cachedElements.currentTempDisplay().textContent = `${currentTemp} °${degree}`;
+      cachedElements.feelsLikeDisplay().textContent = `${feelsLike} °${degree}`;
+      cachedElements.windSpeedDisplay().textContent = `${windSpeed} ${rate}`;
+      cachedElements.humidityDisplay().textContent = `${humidity}%`;
     }
   }
 }
@@ -45,10 +47,13 @@ function cacheElements() {
   const searchBtn = () => document.querySelector('.svg-container');
   const locationDisplay = () => document.querySelector('.location');
   const conditionsDisplay = () => document.querySelector('.conditions');
-  const currentTempDisplay = () => document.querySelector('.currentTemp');
-  const feelsLikeDisplay = () => document.querySelector('.feelsLike');
-  const windSpeedDisplay = () => document.querySelector('.windSpeed');
-  const humidityDisplay = () => document.querySelector('.humidity');
+  const currentTempDisplay = () => document.querySelector('.current-temp');
+  const feelsLikeDisplay = () => document.querySelector('.feels-like-data');
+  const windSpeedDisplay = () => document.querySelector('.wind-speed-data');
+  const humidityDisplay = () => document.querySelector('.humidity-data');
+  const selectedTempScale = () => document.querySelector('.selected');
+  const getCelsius = () => document.querySelector('.metric');
+  const getFahrenheit = () => document.querySelector('.us');
 
   return {
     mySearch,
@@ -59,5 +64,32 @@ function cacheElements() {
     feelsLikeDisplay,
     windSpeedDisplay,
     humidityDisplay,
+    selectedTempScale,
+    getCelsius,
+    getFahrenheit,
   };
+}
+
+function getTemperatureScale() {
+  try {
+    const tempScale = cacheElements().selectedTempScale().classList[0];
+    let degree = 'C';
+    let rate = 'kph';
+    if (tempScale === 'us') {
+      degree = 'F';
+      rate = 'mph';
+    }
+    return { tempScale: tempScale, degree: degree, rate: rate };
+  } catch (e) {
+    return { tempScale: 'metric', degree: 'C', rate: 'kph' };
+  }
+}
+
+function selectTemperatureScale(e) {
+  if (!e.target.classList.contains('selected')) {
+    cacheElements().getCelsius().classList.remove('selected');
+    cacheElements().getFahrenheit().classList.remove('selected');
+    e.target.classList.add('selected');
+  }
+  e.stopPropagation();
 }

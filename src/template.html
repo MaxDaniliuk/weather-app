@@ -56,16 +56,29 @@
               </svg>
             </span>
           </span>
+          <span class="metric-container">
+            <span class="metric selected">°C</span>
+            <span class="us">°F</span>
+          </span>
         </div>
       </div>
       <div class="main">
         <!-- Grid structure for weather display.  -->
         <div class="grid location"></div>
         <div class="grid conditions"></div>
-        <div class="grid currentTemp"></div>
-        <div class="grid feelsLike"></div>
-        <div class="grid windSpeed"></div>
-        <div class="grid humidity"></div>
+        <div class="grid current-temp"></div>
+        <div class="grid feels-like">
+          <span>Feels like:</span>
+          <span class="feels-like-data"></span>
+        </div>
+        <div class="grid wind-speed">
+          <span>Wind speed:</span>
+          <span class="wind-speed-data"></span>
+        </div>
+        <div class="grid humidity">
+          <span>Humidity:</span>
+          <span class="humidity-data"></span>
+        </div>
       </div>
     </div>
   </body>
