@@ -34,9 +34,14 @@ async function processResponse() {
       } = response;
       cachedElements.locationDisplay().textContent = location;
       cachedElements.conditionsDisplay().textContent = conditions;
-      cachedElements.currentTempDisplay().textContent = `${currentTemp} °${degree}`;
-      cachedElements.feelsLikeDisplay().textContent = `${feelsLike} °${degree}`;
+      cachedElements.currentTempDisplay().textContent = `${currentTemp}`;
+      [...cachedElements.currentTempScale()][0].textContent = `°${degree}`;
+      cachedElements.feelsLikeText().textContent = 'Feels like:';
+      cachedElements.feelsLikeDisplay().textContent = `${feelsLike}`;
+      [...cachedElements.currentTempScale()][1].textContent = `°${degree}`;
+      cachedElements.windSpeedText().textContent = 'Wind speed:';
       cachedElements.windSpeedDisplay().textContent = `${windSpeed} ${rate}`;
+      cachedElements.humidityText().textContent = 'Humidity:';
       cachedElements.humidityDisplay().textContent = `${humidity}%`;
     }
   }
@@ -47,10 +52,15 @@ function cacheElements() {
   const searchBtn = () => document.querySelector('.svg-container');
   const locationDisplay = () => document.querySelector('.location');
   const conditionsDisplay = () => document.querySelector('.conditions');
-  const currentTempDisplay = () => document.querySelector('.current-temp');
+  const currentTempDisplay = () => document.querySelector('.current-temp-data');
+  const currentTempScale = () =>
+    document.querySelectorAll('.current-temp-scale');
   const feelsLikeDisplay = () => document.querySelector('.feels-like-data');
+  const feelsLikeText = () => document.querySelector('.feels-like > span');
   const windSpeedDisplay = () => document.querySelector('.wind-speed-data');
+  const windSpeedText = () => document.querySelector('.wind-speed > span');
   const humidityDisplay = () => document.querySelector('.humidity-data');
+  const humidityText = () => document.querySelector('.humidity > span');
   const selectedTempScale = () => document.querySelector('.selected');
   const getCelsius = () => document.querySelector('.metric');
   const getFahrenheit = () => document.querySelector('.us');
@@ -61,9 +71,13 @@ function cacheElements() {
     locationDisplay,
     conditionsDisplay,
     currentTempDisplay,
+    currentTempScale,
     feelsLikeDisplay,
+    feelsLikeText,
     windSpeedDisplay,
+    windSpeedText,
     humidityDisplay,
+    humidityText,
     selectedTempScale,
     getCelsius,
     getFahrenheit,
