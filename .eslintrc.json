@@ -15,5 +15,6 @@
     "consistent-return": "off",
     "no-undef": "off",
     "no-use-before-define": "off"
-  }
+  },
+  "parser": "@babel/eslint-parser"
 }

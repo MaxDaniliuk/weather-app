@@ -85,18 +85,13 @@ function cacheElements() {
 }
 
 function getTemperatureScale() {
-  try {
-    const tempScale = cacheElements().selectedTempScale().classList[0];
-    let degree = 'C';
-    let rate = 'kph';
-    if (tempScale === 'us') {
-      degree = 'F';
-      rate = 'mph';
-    }
-    return { tempScale: tempScale, degree: degree, rate: rate };
-  } catch (e) {
-    return { tempScale: 'metric', degree: 'C', rate: 'kph' };
-  }
+  const tempScale =
+    cacheElements().selectedTempScale()?.classList[0] ?? 'metric';
+  return {
+    tempScale,
+    degree: tempScale === 'us' ? 'F' : 'C',
+    rate: tempScale === 'us' ? 'mph' : 'kph',
+  };
 }
 
 function selectTemperatureScale(e) {
